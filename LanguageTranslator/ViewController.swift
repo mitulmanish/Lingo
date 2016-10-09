@@ -64,22 +64,17 @@ class ViewController: FormViewController, UIImagePickerControllerDelegate, UINav
     private func fetchFormValues() -> [String: String] {
         var params: [String: String] = [:]
         let formValues = form.values()
-        print(formValues)
-        
         
         if let translateFromText = formValues["from"] as? String {
             params["from"] = translateFromText
-            print(translateFromText)
         }
         
         if let languageFrom = formValues["languageFrom"] as? String {
             params["languageFrom"] = languageFrom
-            print(languageFrom)
         }
         
         if let languageTo = formValues["languageTo"] as? String {
             params["languageTo"] = languageTo
-            print(languageTo)
         }
         return params
     }
@@ -103,8 +98,6 @@ class ViewController: FormViewController, UIImagePickerControllerDelegate, UINav
     }
     
     private func extractLanguageCodeFromLanguageName(name: String) -> String? {
-        print("inside")
-        print(name)
         for language in self.languageList! {
             if name == language.name {
                 return language.code
@@ -138,11 +131,11 @@ class ViewController: FormViewController, UIImagePickerControllerDelegate, UINav
                             }
                         }
                     } else {
-                        print("Can't Cast")
+                        print("Can't cast data into dictionary")
                     }
                 }
             } catch {
-                
+                print("Unable to cast into NSData")
             }
         }
     }
