@@ -34,7 +34,20 @@ class ViewController: FormViewController, UIImagePickerControllerDelegate, UINav
             <<< TextAreaRow("from") { row in
                 row.placeholder = "Text to translate"
                 row.textAreaHeight = .Dynamic(initialTextViewHeight: 150)
-            }
+            }.onChange({ (row) in
+                let params = self.fetchFormValues()
+                var finalParams: [String: String] = [:]
+                finalParams["source"] = self.extractLanguageCodeFromLanguageName(params["languageFrom"]!)
+                finalParams["target"] = self.extractLanguageCodeFromLanguageName(params["languageTo"]!)
+                finalParams["text"] = row.value
+                
+                if let translatedTextArea = self.form.rowByTag("to") {
+                    self.translateWithAlomafire(finalParams) { (text) in
+                        translatedTextArea.baseValue = text
+                        translatedTextArea.updateCell()
+                    }
+                }
+            })
             
             <<< AlertRow<String>("languageFrom") { row in
                 for language in self.languageList! {
@@ -51,7 +64,7 @@ class ViewController: FormViewController, UIImagePickerControllerDelegate, UINav
                 }
                 row.title = "To"
                 row.selectorTitle = "Select Language"
-                row.value = self.languageList?.first?.name
+                row.value = self.languageList?[3].name
             }
             
             +++ Section("To")

@@ -19,7 +19,6 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="Lingo" id="2en-Br-ehe">
-                        <barButtonItem key="leftBarButtonItem" title="History" id="34a-2G-eb3"/>
                         <barButtonItem key="rightBarButtonItem" title="Translate" id="X7C-V9-Tyu">
                             <connections>
                                 <action selector="translateAction:" destination="BYZ-38-t0r" id="UDJ-hc-geD"/>
